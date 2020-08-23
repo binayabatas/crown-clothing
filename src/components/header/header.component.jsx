@@ -12,7 +12,7 @@ import './header.styles.scss';
 
 const Header = ({ currentUser, hidden }) => (
     <div className='header'>
-        <Link to='/'>
+        <Link className='logo-container' to='/'>
             <Logo className='logo' />
         </Link>
         <div className='options'>
@@ -22,18 +22,16 @@ const Header = ({ currentUser, hidden }) => (
             <Link className='option' to='/shop'>
                 CONTACT
             </Link>
-            <Link className='option' to='/signIn'>
-                {
-                    currentUser?
-                    <div className='option' onClick={() => auth.signOut()}>
-                        SIGN OUT
-                    </div>
-                    :
-                    <Link className='option' to='/signIn'>
-                        SIGN IN
-                    </Link>
-                }
-            </Link>
+            {
+                currentUser?
+                (<div className='option' onClick={() => auth.signOut()}>
+                    SIGN OUT
+                </div>)
+                :
+                (<Link className='option' to='/signIn'>
+                    SIGN IN
+                </Link>)
+            }
             <CartIcon />
         </div>
         {
